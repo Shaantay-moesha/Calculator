@@ -1,0 +1,61 @@
+# Define  functions
+def add(x, y):
+    return x + y
+
+def subtract(x, y):
+    return x - y
+
+def divide(x, y):
+    if y != 0:
+        return x / y
+    else:
+        print("Error: Cannot divide by zero.")
+        return None
+
+def multiply(x, y):
+    return x * y
+
+# Create a dictionary to map user input to operations
+operations = {
+    '1': add,
+    '2': subtract,
+    '3': divide,
+    '4': multiply,
+}
+
+
+# Function to get user input and perform calculations
+def calculate():
+    print("Select Operation")
+    print("1. ADD")
+    print("2. Subtract")
+    print("3. Divide")
+    print("4. Multiply")
+    
+    while True:
+        user_select = input("What operation would you like to do: ")
+
+        # Check if the choice is one of the four options
+        if user_select in operations.keys():
+            try:
+                num1 = float(input("Enter first number: "))
+                num2 = float(input("Enter second number: "))
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+                continue
+
+            # Perform the selected operation using the dictionary
+            output = operations[user_select](num1, num2)
+            if output is not None:
+                print(f"{num1} {operations[user_select].__name__} {num2} = {output}")
+
+            # Ask if the user wants to perform another calculation
+            next_calculation = input("Would you like to do another calculation(yes/no) ?")
+            if next_calculation.lower() != "yes":
+                print("Bye!!")
+                break
+        else:
+            print("Invalid Input")
+
+if __name__ == "__main__":
+    calculate()
